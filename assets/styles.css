@@ -1,0 +1,21 @@
+body {
+  background-image: url(wood-ftIsis_Stock.jpg);
+  margin: 0;
+}
+
+.image {
+  position: absolute;
+}
+
+.image img {
+  display: block;
+  width: 275px;
+  height: 275px;
+  padding: 15px 15px 60px 15px;
+  /*background-color: #fff;*/
+  background-image: url(handmadepaper.png);
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 3px 3px rgba(0,0,0,.2);
+
+}
