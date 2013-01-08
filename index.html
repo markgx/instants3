@@ -7,6 +7,8 @@
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.9/jquery.transit.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
+  <script src="assets/instagram-js-sdk.js"></script>
 
   <script type="text/javascript">
     window.options = {
@@ -16,53 +18,36 @@
       fadeOutMS: 5000
     };
 
-    // TODO: hardcoded for now, pull from Instagram
-    window.images = [
-      'http://distilleryimage4.s3.amazonaws.com/ad150454586c11e2bcaf22000a1fbcb3_6.jpg',
-      'http://distilleryimage5.s3.amazonaws.com/16edda72587c11e28a3222000a9f17b2_6.jpg',
-      'http://distilleryimage10.s3.amazonaws.com/fcd7c7181a6b11e28159123138178971_6.jpg',
-      'http://distilleryimage11.s3.amazonaws.com/8e95da56267811e2839c1231382045d8_6.jpg',
-      'http://distilleryimage8.s3.amazonaws.com/726336dc588f11e28a5622000a1fbe35_6.jpg',
-      'http://distilleryimage1.s3.amazonaws.com/c5f49f18587911e29b2522000a9f13d5_6.jpg',
-      'http://distilleryimage0.s3.amazonaws.com/0496464e588011e29caa22000a1f96f6_6.jpg',
-      'http://distilleryimage4.s3.amazonaws.com/0e811b7c589211e291e622000a1f9d57_6.jpg',
-      'http://distilleryimage4.s3.amazonaws.com/97dc1166580011e2ab3b22000a9f14cb_6.jpg',
-      'http://distilleryimage10.s3.amazonaws.com/021f1522588411e28b9422000a1fbe38_6.jpg',
-      'http://distilleryimage1.s3.amazonaws.com/a696dd0e8c9411e1abb01231381b65e3_6.jpg',
-      'http://distilleryimage3.s3.amazonaws.com/5bef3316560411e2be8622000a9f192b_6.jpg',
-      'http://distilleryimage10.s3.amazonaws.com/44f155a0587e11e283e822000a1f8e5b_6.jpg',
-      'http://distilleryimage0.s3.amazonaws.com/1e108586588911e2a50222000a1fb870_6.jpg',
-      'http://distilleryimage6.s3.amazonaws.com/5ce6a3fa587d11e2996722000a9f18fe_6.jpg',
-      'http://distilleryimage3.s3.amazonaws.com/6dd96924586211e283fe22000a1fa511_6.jpg',
-      'http://distilleryimage7.s3.amazonaws.com/671dbb52587c11e2816b22000a9f17df_6.jpg',
-      'http://distilleryimage7.s3.amazonaws.com/85e61188589511e2ad7a22000a9f3090_6.jpg',
-      'http://distilleryimage8.s3.amazonaws.com/5e2f3ac0588611e28ed022000a1fbc58_6.jpg',
-      'http://distilleryimage5.s3.amazonaws.com/0e7c4114589311e2ae7122000a9f0a14_6.jpg',
-      'http://distilleryimage7.s3.amazonaws.com/3aa6aa5e586111e29ad022000a1f9a79_6.jpg',
-      'http://distilleryimage3.s3.amazonaws.com/f6fec2e0588411e29a3e22000a1f90ce_6.jpg',
-      'http://distilleryimage11.s3.amazonaws.com/fb89f698589011e28c3c22000a1fb85a_6.jpg',
-      'http://distilleryimage9.s3.amazonaws.com/b2f8e1da589711e2ace922000a1f90f6_6.jpg',
-      'http://distilleryimage11.s3.amazonaws.com/b9941702586111e2af7e22000a1f8ae5_6.jpg',
-      'http://distilleryimage5.s3.amazonaws.com/beafe5d0586c11e29df022000a1fb07c_6.jpg',
-      'http://distilleryimage11.s3.amazonaws.com/2d326664586c11e2b7ab22000a1f90e7_6.jpg',
-      'http://distilleryimage2.s3.amazonaws.com/4673de7e586b11e2876222000a9f0a1b_6.jpg',
-      'http://distilleryimage0.s3.amazonaws.com/a3f42394586e11e2ab5722000a9e0907_6.jpg',
-      'http://distilleryimage7.s3.amazonaws.com/7b45a26a585511e293dd22000a1fb194_6.jpg',
-      'http://distilleryimage11.s3.amazonaws.com/101352aa585d11e2a61722000a1f9d6d_6.jpg',
-      'http://distilleryimage5.s3.amazonaws.com/fde922ec586311e2b56022000a9f1354_6.jpg',
-      'http://distilleryimage6.s3.amazonaws.com/a7830690587f11e282e122000a1f9aae_6.jpg',
-      'http://distilleryimage9.s3.amazonaws.com/8f5ad17c585e11e2aaa822000a1fb0dd_6.jpg',
-      'http://distilleryimage0.s3.amazonaws.com/49247e8c589611e2a58122000a9d0ed5_6.jpg',
-      'http://distilleryimage4.s3.amazonaws.com/e804a01c585611e28df322000a1f9367_6.jpg',
-      'http://distilleryimage7.s3.amazonaws.com/c4c0474a585711e2b0f022000a9f1369_6.jpg',
-      'http://distilleryimage10.s3.amazonaws.com/230de8cc585611e28b3522000a1f9867_6.jpg',
-      'http://distilleryimage1.s3.amazonaws.com/3a911afc585e11e2b4ea22000a1fbdb0_6.jpg',
-      'http://distilleryimage11.s3.amazonaws.com/820937e8588611e2aa5e22000a1f96ec_6.jpg'
-    ];
+    var IG = new Instagram();
 
-    // TODO: preload images
+    if (!window.location.hash) {
+      IG.auth(igParams); //then will go to the authorize page
+
+      var igParams = {
+        client_id    : '1e4ea3f6ea2a49899f32429d9a53566b',
+        redirect_uri : 'http://localhost:8000/',
+        scope        : 'basic',
+        response_type: 'token'
+      };
+    } else {
+
+      //handle the fn token
+      var token = IG.getToken();
+
+      //you need to set token before you use it
+      IG.setOptions({
+        token: token
+      });
+    }
 
     $(document).ready(function() {
+      IG.getPopular(function(result) {
+        // TODO: preload images
+        window.images = _.map(result.data, function(o) {
+          return o.images.low_resolution.url
+        });
+      });
+
       window.count = 0;
       window.interval = setInterval('showImage(images[window.count])', options.intervalMS);
     });
