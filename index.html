@@ -21,14 +21,14 @@
     var IG = new Instagram();
 
     if (!window.location.hash) {
-      IG.auth(igParams); //then will go to the authorize page
-
       var igParams = {
         client_id    : '1e4ea3f6ea2a49899f32429d9a53566b',
         redirect_uri : 'http://localhost:8000/',
         scope        : 'basic',
         response_type: 'token'
       };
+
+      IG.auth(igParams); //then will go to the authorize page
     } else {
 
       //handle the fn token
