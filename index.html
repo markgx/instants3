@@ -8,40 +8,32 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.9/jquery.transit.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
-  <script src="assets/instagram-js-sdk.js"></script>
+  <script src="assets/instalib.js"></script>
 
   <script type="text/javascript">
     window.options = {
       imageLength: 275,
       intervalMS: 2000,
       fadeDelayMS: 15000,
-      fadeOutMS: 5000
+      fadeOutMS: 5000,
+      clientID: '1e4ea3f6ea2a49899f32429d9a53566b',
+      callbackURL: 'http://localhost:8000/'
     };
 
-    var IG = new Instagram();
+    var instagram;
+    var accessToken = null;
 
-    if (!window.location.hash) {
-      var igParams = {
-        client_id    : '1e4ea3f6ea2a49899f32429d9a53566b',
-        redirect_uri : 'http://localhost:8000/',
-        scope        : 'basic',
-        response_type: 'token'
-      };
-
-      IG.auth(igParams); //then will go to the authorize page
+    if (window.location.hash) {
+      accessToken = window.location.hash.replace('#access_token=', '');
+      instagram = new Instagram(options.clientID, options.callbackURL, '', accessToken);
     } else {
+      instagram = new Instagram(options.clientID, options.callbackURL, '');
 
-      //handle the fn token
-      var token = IG.getToken();
-
-      //you need to set token before you use it
-      IG.setOptions({
-        token: token
-      });
+      instagram.authorize();
     }
 
     $(document).ready(function() {
-      IG.getPopular(function(result) {
+      instagram.getPopularFeed(function(result) {
         window.images = _.map(result.data, function(o) {
           return o.images.low_resolution.url
         });
