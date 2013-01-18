@@ -1,18 +1,44 @@
-function loadPopularImages(instagram) {
+function ImageList() {
+  this.imageArray = [];
+  this.currentIndex = 0;
+}
+
+ImageList.prototype.add = function(image) {
+  if (_(this.imageArray).where({ id: image.id }).length == 0) {
+    this.imageArray.push(image);
+  }
+}
+
+ImageList.prototype.getNextImage = function() {
+  if (this.currentIndex >= this.imageArray.length) {
+    this.currentIndex = 0;
+  }
+
+  var currentImage = this.imageArray[this.currentIndex];
+  this.currentIndex++;
+  return currentImage;
+}
+
+ImageList.prototype.getArray = function() {
+  return this.imageArray;
+}
+
+function loadPopularImages(instagram, imageList) {
   return instagram.getPopularFeed(function(result) {
-    window.images = _.map(result.data, function(o) {
-      return o.images.low_resolution.url
+    var images = _.map(result.data, function(o) {
+      return { id: o.id, url: o.images.low_resolution.url };
     });
 
     // preload images
-    $(window.images).each(function() {
-      $('<img />').attr('src', this).appendTo('#preload').css('display','none');
+    _(images).each(function(el) {
+      imageList.add(el);
+      $('<img />').attr('src', el.url).appendTo('#preload').css('display','none');
     });
   });
 }
 
-function showImage(imageUrl) {
-  var $image = $('<div class="image"><img src="' + imageUrl + '" /></div>');
+function showImage(image) {
+  var $image = $('<div class="image"><img src="' + image.url + '" /></div>');
 
   // randomize side to throw from
 
@@ -60,13 +86,6 @@ function showImage(imageUrl) {
     .transition({ opacity: 0, delay: options.fadeDelayMS }, options.fadeOutMS, 'in', function() {
       this.remove();
     });
-
-  // cycle through images
-  if (count == images.length - 1) {
-    count = 0;
-  } else {
-    count++;
-  }
 }
 
 function randomX() {

@@ -21,8 +21,10 @@
       callbackURL: 'http://localhost:8000/'
     };
 
-    var instagram;
+    window.instagram = null;
     var accessToken = null;
+
+    window.imageList = new ImageList();
 
     if (window.location.hash) {
       accessToken = window.location.hash.replace('#access_token=', '');
@@ -33,9 +35,8 @@
     }
 
     $(document).ready(function() {
-      loadPopularImages(instagram).success(function() {
-        window.count = 0;
-        window.interval = setInterval('showImage(images[window.count])', options.intervalMS);
+      loadPopularImages(instagram, imageList).success(function() {
+        window.interval = setInterval('showImage(imageList.getNextImage())', options.intervalMS);
       });
     });
   </script>
