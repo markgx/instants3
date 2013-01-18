@@ -1,3 +1,16 @@
+function loadPopularImages(instagram) {
+  return instagram.getPopularFeed(function(result) {
+    window.images = _.map(result.data, function(o) {
+      return o.images.low_resolution.url
+    });
+
+    // preload images
+    $(window.images).each(function() {
+      $('<img />').attr('src', this).appendTo('#preload').css('display','none');
+    });
+  });
+}
+
 function showImage(imageUrl) {
   var $image = $('<div class="image"><img src="' + imageUrl + '" /></div>');
 
