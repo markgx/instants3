@@ -13,10 +13,32 @@ body {
   width: 275px;
   height: 275px;
   padding: 15px 15px 70px 15px;
-  /*background-color: #fff;*/
   background-image: url(handmadepaper.png);
   border: 1px solid #ddd;
   border-radius: 2px;
   box-shadow: 3px 3px rgba(0,0,0,.2);
+}
 
+#welcome {
+  width: 400px;
+  padding: 18px 18px 70px 18px;
+  background-image: url(handmadepaper.png);
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 3px 3px rgba(0,0,0,.2);
+  margin: 40px auto 0;
+  transform: rotate(-3deg);
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+}
+
+#welcome .inset {
+  height: 345px;
+  background-color: #e4e4dd;
+  border: 1px #e2e2e2 solid;
+  padding: 12px;
+  line-height: 30px;
+  font-family: 'Donegal One', serif;
+  font-size: 1.4em;
 }

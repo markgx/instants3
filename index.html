@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>instants.nu - an Instagram web viewer</title>
   <link rel="stylesheet" href="assets/styles.css"></link>
+  <link href='http://fonts.googleapis.com/css?family=Donegal+One' rel='stylesheet' type='text/css'>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.9/jquery.transit.min.js"></script>
@@ -30,7 +31,6 @@
       loggedIn = true;
     } else {
       instagram = new Instagram(options.clientID, options.callbackURL, '');
-      // instagram.authorize();
     }
 
     $(document).ready(function() {
@@ -39,13 +39,27 @@
           window.interval = setInterval('showImage(imageList.getNextImage())', options.intervalMS);
         });
       } else {
-        // TODO: show welcome modal
+        $('#welcome').show();
       }
+
+      $('.auth').on('click', function(e) {
+        e.preventDefault();
+        instagram.authorize();
+      });
     });
   </script>
 </head>
 <body>
   <div id="board"></div>
+  <div id="welcome" style="display: none;">
+    <div class="inset">
+      <p>
+        Hey there, instants is a fun way to view the most recent photos in your Instagram feed in your browser. Click the button below to log in with your Instagram account.
+      </p>
+
+      <p style="text-align: center;"><a href="#" class="auth"><img src="assets/signin.png" /></a></p>
+    </div>
+  </div>
   <div id="preload"></div>
 </body>
 </html>
