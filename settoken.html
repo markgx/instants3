@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>instants.nu</title>
+  <script type="text/javascript">
+    // TODO: check for localStorage support
+
+    if (window.location.hash) {
+      var accessToken = window.location.hash.replace('#access_token=', '');
+      localStorage.accessToken = accessToken;
+      window.location.href = '/';
+    } else {
+      // TODO: fail
+    }
+  </script>
+</head>
+<body>
+  ...
+</body>
+</html>

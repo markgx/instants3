@@ -18,26 +18,29 @@
       fadeDelayMS: 15000,
       fadeOutMS: 5000,
       clientID: '1e4ea3f6ea2a49899f32429d9a53566b',
-      callbackURL: 'http://localhost:8000/'
+      callbackURL: 'http://localhost:8000/settoken.html'
     };
 
     window.instagram = null;
-    var accessToken = null;
-
     window.imageList = new ImageList();
+    var loggedIn = false;
 
-    if (window.location.hash) {
-      accessToken = window.location.hash.replace('#access_token=', '');
-      instagram = new Instagram(options.clientID, options.callbackURL, '', accessToken);
+    if (localStorage.accessToken) {
+      instagram = new Instagram(options.clientID, options.callbackURL, '', localStorage.accessToken);
+      loggedIn = true;
     } else {
       instagram = new Instagram(options.clientID, options.callbackURL, '');
-      instagram.authorize();
+      // instagram.authorize();
     }
 
     $(document).ready(function() {
-      loadPopularImages(instagram, imageList).success(function() {
-        window.interval = setInterval('showImage(imageList.getNextImage())', options.intervalMS);
-      });
+      if (loggedIn) {
+        loadPopularImages(instagram, imageList).success(function() {
+          window.interval = setInterval('showImage(imageList.getNextImage())', options.intervalMS);
+        });
+      } else {
+        // TODO: show welcome modal
+      }
     });
   </script>
 </head>
