@@ -1,5 +1,5 @@
 body {
-  background-image: url(wood-ftIsis_Stock.jpg);
+  background-image: url(../images/wood-ftIsis_Stock.jpg);
   margin: 0;
   overflow: hidden;
 }
@@ -13,7 +13,7 @@ body {
   width: 275px;
   height: 275px;
   padding: 15px 15px 70px 15px;
-  background-image: url(handmadepaper.png);
+  background-image: url(../images/handmadepaper.png);
   border: 1px solid #ddd;
   border-radius: 2px;
   box-shadow: 3px 3px rgba(0,0,0,.2);
@@ -22,7 +22,7 @@ body {
 #welcome {
   width: 400px;
   padding: 18px 18px 70px 18px;
-  background-image: url(handmadepaper.png);
+  background-image: url(../images/handmadepaper.png);
   border: 1px solid #ddd;
   border-radius: 2px;
   box-shadow: 3px 3px rgba(0,0,0,.2);
