@@ -4,6 +4,15 @@ body {
   overflow: hidden;
 }
 
+#header {
+  font-family: 'Finger Paint', cursive;
+  opacity: .65;
+  font-size: 1.6em;
+  position: fixed;
+  top: 16px;
+  left: 12px;
+}
+
 .image {
   position: absolute;
 }
