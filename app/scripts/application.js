@@ -45,7 +45,7 @@ var InstantsView = Backbone.View.extend({
     if (this.loggedIn) {
       var self = this;
 
-      this._getImages().success(function() {
+      this._loadFeedImages().success(function() {
         self.interval = setInterval(function() {
           self._showImage(self.imageList.getNextImage());
         }, options.intervalMS);
@@ -60,8 +60,22 @@ var InstantsView = Backbone.View.extend({
     this.instagram.authorize();
   },
 
-  _getImages: function() {
-    return this._loadPopularImages();
+  _loadFeedImages: function() {
+    var self = this;
+
+    return this.instagram.getUserFeed(function(result) {
+      self.nextMaxId = result.pagination.next_max_id; // if fetching more images, start from this id
+
+      var images = _.map(result.data, function(o) {
+        return { id: o.id, url: o.images.low_resolution.url };
+      });
+
+      // preload images
+      _(images).each(function(el) {
+        self.imageList.add(el);
+        $('<img />').attr('src', el.url).appendTo('#preload').css('display','none');
+      });
+    }, 30, null, self.nextMaxId);
   },
 
   _loadPopularImages: function() {
