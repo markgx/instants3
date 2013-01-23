@@ -10,6 +10,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.9/jquery.transit.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
 
   <!-- build:js scripts/scripts.js -->
   <script src="scripts/vendor/instalib.js"></script>
@@ -23,33 +24,13 @@
       fadeDelayMS: 15000,
       fadeOutMS: 5000,
       clientID: '1e4ea3f6ea2a49899f32429d9a53566b',
-      callbackURL: 'http://localhost:3501/settoken.html'
+      callbackURL: 'http://localhost:3501/settoken.html',
+      el: 'body'
     };
 
-    window.instagram = null;
-    window.imageList = new ImageList();
-    var loggedIn = false;
-
-    if (localStorage.accessToken) {
-      instagram = new Instagram(options.clientID, options.callbackURL, '', localStorage.accessToken);
-      loggedIn = true;
-    } else {
-      instagram = new Instagram(options.clientID, options.callbackURL, '');
-    }
-
     $(document).ready(function() {
-      if (loggedIn) {
-        loadPopularImages(instagram, imageList).success(function() {
-          window.interval = setInterval('showImage(imageList.getNextImage())', options.intervalMS);
-        });
-      } else {
-        $('#welcome').show();
-      }
-
-      $('.auth').on('click', function(e) {
-        e.preventDefault();
-        instagram.authorize();
-      });
+      window.instantsView = new InstantsView(window.options);
+      instantsView.render();
     });
   </script>
 </head>
