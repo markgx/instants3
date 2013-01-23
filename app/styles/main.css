@@ -51,3 +51,48 @@ body {
   font-family: 'Donegal One', serif;
   font-size: 1.4em;
 }
+
+#about-trigger {
+  font-family: 'Finger Paint', cursive;
+  opacity: .65;
+  font-size: 1.8em;
+  position: fixed;
+  top: 8px;
+  right: 12px;
+}
+
+#about-trigger a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px;
+}
+
+#about-trigger a:hover {
+  color: #FFFEE2;
+}
+
+#about {
+  width: 400px;
+  padding: 18px;
+  background-color: #fdffd0;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 5px 5px rgba(0,0,0,.2);
+  margin: 50px auto 0;
+  font-family: 'Lato', sans-serif;
+  position: relative;
+  z-index: 1000;
+}
+
+#about a {
+  color: #DA7C7C;
+}
+
+#close {
+  text-align: center;
+  color: #777;
+}
+
+#close a {
+  color: inherit;
+}
