@@ -23,6 +23,11 @@ ImageList.prototype.getArray = function() {
   return this.imageArray;
 }
 
+var FEED_TYPES = {
+  FEED: 1,
+  POPULAR: 2
+};
+
 var InstantsView = Backbone.View.extend({
   initialize: function() {
     this.loggedIn = false;
@@ -46,11 +51,21 @@ var InstantsView = Backbone.View.extend({
   render: function() {
     if (this.loggedIn) {
       var self = this;
+      var loadFunction = null;
 
-      this._loadFeedImages().success(function() {
+      if (this.options.feedType === FEED_TYPES.FEED) {
+        loadFunction = this._loadFeedImages;
+      } else {
+        loadFunction = this._loadPopularImages;
+      }
+
+      loadFunction.call(self).success(function() {
         self.interval = setInterval(function() {
-          self._showImage(self.imageList.getNextImage());
+          self._showImage();
         }, options.intervalMS);
+
+        // call twice -- better way to do this?
+        setTimeout(function() { loadFunction.call(self); }, 20000);
       });
     } else {
       $('#welcome').show();
@@ -106,7 +121,8 @@ var InstantsView = Backbone.View.extend({
     });
   },
 
-  _showImage: function(image) {
+  _showImage: function() {
+    var image = this.imageList.getNextImage();
     var $image = $('<div class="image"><img src="' + image.url + '" /></div>');
 
     // randomize side to throw from
