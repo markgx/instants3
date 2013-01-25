@@ -1,3 +1,5 @@
+@import "compass/css3/transform";
+
 body {
   background-image: url(/images/wood-ftIsis_Stock.jpg);
   margin: 0;
@@ -36,10 +38,7 @@ body {
   border-radius: 2px;
   box-shadow: 3px 3px rgba(0,0,0,.2);
   margin: 40px auto 0;
-  transform: rotate(-3deg);
-  -webkit-transform: rotate(-3deg);
-  -moz-transform: rotate(-3deg);
-  -o-transform: rotate(-3deg);
+  @include rotate(-3deg);
 
   .inset {
     height: 345px;
