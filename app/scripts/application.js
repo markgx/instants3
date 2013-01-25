@@ -92,16 +92,7 @@ var InstantsView = Backbone.View.extend({
 
     return this.instagram.getUserFeed(function(result) {
       self.nextMaxId = result.pagination.next_max_id; // if fetching more images, start from this id
-
-      var images = _.map(result.data, function(o) {
-        return { id: o.id, url: o.images.low_resolution.url };
-      });
-
-      // preload images
-      _(images).each(function(el) {
-        self.imageList.add(el);
-        $('<img />').attr('src', el.url).appendTo('#preload').css('display','none');
-      });
+      self._processFeedResults(result);
     }, 30, null, self.nextMaxId);
   },
 
@@ -109,15 +100,26 @@ var InstantsView = Backbone.View.extend({
     var self = this;
 
     return this.instagram.getPopularFeed(function(result) {
-      var images = _.map(result.data, function(o) {
-        return { id: o.id, url: o.images.low_resolution.url };
-      });
+      self._processFeedResults(result);
+    });
+  },
 
-      // preload images
-      _(images).each(function(el) {
-        self.imageList.add(el);
-        $('<img />').attr('src', el.url).appendTo('#preload').css('display','none');
-      });
+  _processFeedResults: function(result) {
+    var self = this;
+
+    var images = _.map(result.data, function(o) {
+      return {
+        id: o.id,
+        url: o.images.low_resolution.url,
+        link: o.link,
+        username: o.user.username
+      };
+    });
+
+    // preload images
+    _(images).each(function(el) {
+      self.imageList.add(el);
+      $('<img />').attr('src', el.url).appendTo('#preload').css('display','none');
     });
   },
 
