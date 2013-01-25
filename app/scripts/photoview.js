@@ -8,7 +8,7 @@ var PhotoView = Backbone.View.extend({
 
   render: function() {
     var image = this.model;
-    this.$el.append('<img src="' + image.url + '" />')
+    this.$el.append('<img src="' + image.url + '" /><div class="username">' + image.username + '</div>')
 
     // randomize side to throw from
 

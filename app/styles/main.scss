@@ -1,4 +1,6 @@
 @import "compass/css3/transform";
+@import "compass/css3/opacity";
+@import "compass/css3/transition";
 
 body {
   background-image: url(/images/wood-ftIsis_Stock.jpg);
@@ -8,7 +10,7 @@ body {
 
 #header {
   font-family: 'Finger Paint', cursive;
-  opacity: .65;
+  @include opacity(.65);
   font-size: 1.6em;
   position: fixed;
   top: 16px;
@@ -18,16 +20,33 @@ body {
 .image {
   position: absolute;
   cursor: pointer;
+  height: 360px;
+  background-image: url(/images/handmadepaper.png);
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 3px 3px rgba(0,0,0,.2);
 
   img {
-    display: block;
     width: 275px;
     height: 275px;
-    padding: 15px 15px 70px 15px;
-    background-image: url(/images/handmadepaper.png);
-    border: 1px solid #ddd;
-    border-radius: 2px;
-    box-shadow: 3px 3px rgba(0,0,0,.2);
+    padding: 15px 15px 0px 15px;
+  }
+
+  .username {
+    position: relative;
+    text-align: right;
+    padding-top: 20px;
+    padding-right: 18px;
+    font-family: 'Finger Paint', cursive;
+    font-size: 1.05em;
+    color: #555;
+    @include opacity(0);
+  }
+
+  &:hover .username {
+    @include transition-property(opacity);
+    @include transition-duration(.3s);
+    @include opacity(1);
   }
 }
 
@@ -54,7 +73,7 @@ body {
 
 #about-trigger {
   font-family: 'Finger Paint', cursive;
-  opacity: .65;
+  @include opacity(.65);
   font-size: 1.8em;
   position: fixed;
   top: 8px;
