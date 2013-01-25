@@ -2,16 +2,12 @@ var PhotoView = Backbone.View.extend({
   tagName: 'div',
   className: 'image',
 
-  initialize: function() {
-    this.parentView = this.options.parentView;
-
-    // copy a few options from parent view
-    _(this.options).extend(_(this.parentView.options)
-      .pick('imageLength', 'fadeDelayMS', 'fadeOutMS'));
+  events: {
+    'click': 'openImageLink'
   },
 
   render: function() {
-    var image = this.parentView.imageList.getNextImage();
+    var image = this.model;
     this.$el.append('<img src="' + image.url + '" />')
 
     // randomize side to throw from
@@ -60,6 +56,10 @@ var PhotoView = Backbone.View.extend({
       .transition({ opacity: 0, delay: this.options.fadeDelayMS }, this.options.fadeOutMS, 'in', function() {
         this.remove();
       });
+  },
+
+  openImageLink: function() {
+    window.open(this.model.link);
   },
 
   _randomX: function() {

@@ -94,7 +94,11 @@ var InstantsView = Backbone.View.extend({
   },
 
   _showImage: function() {
-    var photoView = new PhotoView({ parentView: this });
+    var image = this.imageList.getNextImage();
+    var viewOptions = _({ model: image })
+      .extend(_(this.options)
+        .pick('imageLength', 'fadeDelayMS', 'fadeOutMS'));
+    var photoView = new PhotoView(viewOptions);
     photoView.render();
   }
 });
