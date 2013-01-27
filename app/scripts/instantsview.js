@@ -10,12 +10,13 @@ var InstantsView = Backbone.View.extend({
     }
 
     this.imageList = new ImageList();
+
+    this.aboutView = new AboutView({ el: $('#about') });
   },
 
   events: {
     'click .auth': 'authorize',
-    'click #about-icon': 'toggleAbout',
-    'click #close a': 'hideAbout'
+    'click #about-icon': 'showAbout'
   },
 
   render: function() {
@@ -51,14 +52,9 @@ var InstantsView = Backbone.View.extend({
     this.instagram.authorize();
   },
 
-  toggleAbout: function(e) {
+  showAbout: function(e) {
     e.preventDefault();
-    $('#about').toggle();
-  },
-
-  hideAbout: function(e) {
-    e.preventDefault();
-    $('#about').hide();
+    this.aboutView.render();
   },
 
   _loadFeedImages: function() {

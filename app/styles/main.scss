@@ -102,28 +102,26 @@ body {
 }
 
 #about {
-  width: 400px;
-  padding: 18px;
-  background-color: #fdffd0;
+  width: 450px;
+  padding: 30px;
+  background: url(/images/gplaypattern.png);
   border: 1px solid #ddd;
-  border-radius: 2px;
-  box-shadow: 5px 5px rgba(0,0,0,.2);
+  border-radius: 5px;
   margin: 50px auto 0;
   font-family: 'Lato', sans-serif;
   position: relative;
   z-index: 1000;
 
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  h2, h3 {
+    font-family: 'Finger Paint', cursive;
+  }
+
   a {
     color: #DA7C7C;
-  }
-}
-
-#close {
-  text-align: center;
-  color: #777;
-
-  a {
-    color: inherit;
   }
 }
 
@@ -134,4 +132,15 @@ body {
   position: fixed;
   top: 50%;
   left:49%;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  @include opacity(.5);
 }
