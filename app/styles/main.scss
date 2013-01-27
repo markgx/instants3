@@ -126,3 +126,12 @@ body {
     color: inherit;
   }
 }
+
+#spinner {
+  display: none;
+  color: #fff;
+  @include opacity(.8);
+  position: fixed;
+  top: 50%;
+  left:49%;
+}

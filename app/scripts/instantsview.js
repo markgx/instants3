@@ -29,6 +29,8 @@ var InstantsView = Backbone.View.extend({
         loadFunction = this._loadPopularImages;
       }
 
+      $('#spinner').show();
+
       loadFunction.call(self).success(function() {
         self.interval = setInterval(function() {
           self._showImage();
@@ -36,6 +38,8 @@ var InstantsView = Backbone.View.extend({
 
         // call twice -- better way to do this?
         setTimeout(function() { loadFunction.call(self); }, 20000);
+
+        $('#spinner').hide();
       });
     } else {
       $('#welcome').show();
