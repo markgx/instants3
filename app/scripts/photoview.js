@@ -67,6 +67,6 @@ var PhotoView = Backbone.View.extend({
   },
 
   _randomY: function() {
-    return Math.floor(Math.random() * (window.innerHeight - options.imageLength));
+    return Math.floor(Math.random() * (window.innerHeight - options.imageLength - 60));
   }
 });
