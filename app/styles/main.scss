@@ -1,3 +1,5 @@
+@import "fontawesome";
+
 @import "compass/css3/transform";
 @import "compass/css3/opacity";
 @import "compass/css3/transition";
@@ -71,22 +73,31 @@ body {
   }
 }
 
-#about-trigger {
+#actions {
   font-family: 'Finger Paint', cursive;
   @include opacity(.65);
   font-size: 1.8em;
   position: fixed;
   top: 8px;
   right: 12px;
-}
 
-#about-trigger a {
-  color: #fff;
-  text-decoration: none;
-  padding: 8px;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 
-  &:hover {
-    color: #FFFEE2;
+    li {
+      display: inline;
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        color: #4B4948;
+        @include transition-property(color);
+        @include transition-duration(.1s);
+        cursor: pointer;
+      }
+    }
   }
 }
 

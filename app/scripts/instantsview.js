@@ -14,7 +14,7 @@ var InstantsView = Backbone.View.extend({
 
   events: {
     'click .auth': 'authorize',
-    'click #about-trigger a': 'toggleAbout',
+    'click #about-icon': 'toggleAbout',
     'click #close a': 'hideAbout'
   },
 
