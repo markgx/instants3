@@ -75,7 +75,6 @@ body {
 
 #actions {
   font-family: 'Finger Paint', cursive;
-  @include opacity(.65);
   font-size: 1.8em;
   position: fixed;
   top: 8px;
@@ -91,11 +90,15 @@ body {
       color: #fff;
       text-decoration: none;
 
-      &:hover {
-        color: #4B4948;
-        @include transition-property(color);
-        @include transition-duration(.1s);
-        cursor: pointer;
+      i {
+        @include opacity(.65);
+
+        &:hover {
+          color: #4B4948;
+          @include transition-property(color);
+          @include transition-duration(.1s);
+          cursor: pointer;
+        }
       }
     }
   }
@@ -131,10 +134,39 @@ body {
   }
 }
 
+#settings-menu {
+  position: absolute;
+  width: 200px;
+  margin-left: -140px;
+  background: url(/images/gplaypattern.png);
+  padding: 10px;
+  border: 2px solid #666;
+  border-radius: 5px;
+  color: #333;
+  font-family: 'Lato', sans-serif;
+  font-size: .5em;
+
+  &:before {
+    position: absolute;
+    top: -7px;
+    right: 9px;
+    display: inline-block;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #666;
+    border-left: 7px solid transparent;
+    content: '';
+  }
+
+  h3:first-child {
+    font-family: 'Finger Paint', cursive;
+    margin-top: 0;
+  }
+}
+
 #spinner {
   display: none;
-  color: #fff;
-  @include opacity(.8);
+  color: #000;
+  @include opacity(.6);
   position: fixed;
   top: 50%;
   left:49%;
@@ -148,5 +180,6 @@ body {
   bottom: 0;
   left: 0;
   background-color: #000;
+  z-index: 1;
   @include opacity(.5);
 }

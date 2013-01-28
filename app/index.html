@@ -18,6 +18,7 @@
   <script src="scripts/application.js"></script>
   <script src="scripts/photoview.js"></script>
   <script src="scripts/aboutview.js"></script>
+  <script src="scripts/settingsview.js"></script>
   <script src="scripts/instantsview.js"></script>
   <!-- endbuild -->
 
@@ -54,7 +55,18 @@
   <div id="actions">
     <ul>
       <li><i id="about-icon" class="icon-question-sign"></i></li>
-      <li><i id="settings-icon" class="icon-cog"></i></li>
+      <li>
+        <i id="settings-icon" class="icon-cog"></i>
+        <div id="settings-menu" style="display: none;">
+          <h3>Settings</h3>
+<!--           <p>
+            <label><input type="radio" name="feed-type" value="1"> My Feed</label>
+            <label><input type="radio" name="feed-type" value="2"> Popular</label>
+          </p>
+ -->
+          <p><a href="#" class="sign-out">Sign out of instants</a></p>
+        </div>
+      </li>
     </ul>
   </div>
   <div id="spinner"><i class="icon-spinner icon-3x icon-spin"></i></div>

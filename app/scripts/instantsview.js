@@ -12,11 +12,13 @@ var InstantsView = Backbone.View.extend({
     this.imageList = new ImageList();
 
     this.aboutView = new AboutView({ el: $('#about') });
+    this.settingsView = new SettingsView({ el: $('#settings-menu') });
   },
 
   events: {
     'click .auth': 'authorize',
-    'click #about-icon': 'showAbout'
+    'click #about-icon': 'showAbout',
+    'click #settings-icon': 'showSettings'
   },
 
   render: function() {
@@ -55,6 +57,11 @@ var InstantsView = Backbone.View.extend({
   showAbout: function(e) {
     e.preventDefault();
     this.aboutView.render();
+  },
+
+  showSettings: function(e) {
+    e.preventDefault();
+    this.settingsView.render(e);
   },
 
   _loadFeedImages: function() {
