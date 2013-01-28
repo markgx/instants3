@@ -7,12 +7,11 @@ var AboutView = Backbone.View.extend({
 
     var self = this;
 
-    $('#overlay').on('click', function(e) {
+    $('#overlay').one('click', function(e) {
       var $overlay = $(this);
       self.$el.transit({ opacity: 0 }, 200, function() {
         $(this).hide();
         $overlay.hide();
-        $overlay.off('click');
       });
     });
   },
