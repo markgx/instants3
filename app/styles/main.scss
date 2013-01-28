@@ -107,7 +107,7 @@ body {
   background: url(/images/gplaypattern.png);
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin-left: -250px;
+  margin-left: -280px;
   font-family: 'Lato', sans-serif;
   position: absolute;
   top: 50px;
@@ -123,7 +123,11 @@ body {
   }
 
   a {
-    color: #DA7C7C;
+    color: #CC0A0A;
+
+    &:hover {
+      color: #F88366;
+    }
   }
 }
 
