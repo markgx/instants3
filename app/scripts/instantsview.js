@@ -9,10 +9,13 @@ var InstantsView = Backbone.View.extend({
       this.instagram = new Instagram(this.options.clientID, this.options.callbackURL, '');
     }
 
-    this.imageList = new ImageList();
+    if (localStorage.feedType == null) {
+      localStorage.feedType = FEED_TYPES.FEED;
+    }
 
+    this.imageList = new ImageList();
     this.aboutView = new AboutView({ el: $('#about') });
-    this.settingsView = new SettingsView({ el: $('#settings-menu') });
+    this.settingsView = new SettingsView({ el: $('#settings-menu'), parentView: this });
   },
 
   events: {
@@ -26,7 +29,7 @@ var InstantsView = Backbone.View.extend({
       var self = this;
       var loadFunction = null;
 
-      if (this.options.feedType === FEED_TYPES.FEED) {
+      if (parseInt(localStorage.feedType) === FEED_TYPES.FEED) {
         loadFunction = this._loadFeedImages;
       } else {
         loadFunction = this._loadPopularImages;
@@ -40,12 +43,13 @@ var InstantsView = Backbone.View.extend({
         }, options.intervalMS);
 
         // call twice -- better way to do this?
-        setTimeout(function() { loadFunction.call(self); }, 20000);
+        self.pendingLoad = setTimeout(function() { loadFunction.call(self); }, 20000);
 
         $('#spinner').hide();
       });
     } else {
       $('#welcome').show();
+      $('#settings-icon').parent().hide(); // hide settings icon
     }
   },
 
@@ -62,6 +66,18 @@ var InstantsView = Backbone.View.extend({
   showSettings: function(e) {
     e.preventDefault();
     this.settingsView.render(e);
+  },
+
+  switchFeed: function(feedType) {
+    clearInterval(this.interval);
+
+    if (this.pendingLoad) {
+      clearTimeout(this.pendingLoad);
+    }
+
+    this.nextMaxId = null; // reset feed max ID
+    this.imageList = new ImageList();
+    this.render();
   },
 
   _loadFeedImages: function() {

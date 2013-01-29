@@ -1,6 +1,6 @@
 var SettingsView = Backbone.View.extend({
   initialize: function() {
-    $('[name=feed-type][value=' + window.options.feedType + ']').prop('checked', true);
+    $('[name=feed-type][value=' + localStorage.feedType + ']').prop('checked', true);
   },
 
   render: function(e) {
@@ -23,14 +23,21 @@ var SettingsView = Backbone.View.extend({
   },
 
   events: {
+    'change .feed-type': 'changeFeedType',
     'click .sign-out': 'signOut'
+  },
+
+  changeFeedType: function(e) {
+    var feedType = parseInt($('.feed-type:checked').val());
+    localStorage.feedType = feedType;
+    this.options.parentView.switchFeed(feedType);
   },
 
   signOut: function(e) {
     e.preventDefault();
 
     if (confirm('Are you sure you want to sign out?')) {
-      delete localStorage.accessToken;
+      localStorage.clear();
       window.location.href = '/';
     }
   }

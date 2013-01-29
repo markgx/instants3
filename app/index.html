@@ -30,7 +30,6 @@
       fadeOutMS: 5000,
       clientID: '1e4ea3f6ea2a49899f32429d9a53566b',
       callbackURL: 'http://localhost:3501/settoken.html',
-      feedType: FEED_TYPES.FEED,
       el: 'body'
     };
 
@@ -59,11 +58,11 @@
         <i id="settings-icon" class="icon-cog"></i>
         <div id="settings-menu" style="display: none;">
           <h3>Settings</h3>
-<!--           <p>
-            <label><input type="radio" name="feed-type" value="1"> My Feed</label>
-            <label><input type="radio" name="feed-type" value="2"> Popular</label>
+          <p>
+            <label><input type="radio" name="feed-type" class="feed-type" value="1"> My Feed</label>
+            <label><input type="radio" name="feed-type" class="feed-type" value="2"> Popular</label>
           </p>
- -->
+
           <p><a href="#" class="sign-out">Sign out of instants</a></p>
         </div>
       </li>
