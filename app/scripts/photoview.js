@@ -63,10 +63,10 @@ var PhotoView = Backbone.View.extend({
   },
 
   _randomX: function() {
-    return Math.floor(Math.random() * (window.innerWidth - options.imageLength));
+    return Math.floor(Math.random() * (window.innerWidth - options.imageLength - 15)); // padding
   },
 
   _randomY: function() {
-    return Math.floor(Math.random() * (window.innerHeight - options.imageLength - 60));
+    return Math.floor(Math.random() * (window.innerHeight - options.imageLength - 85)); // padding
   }
 });
