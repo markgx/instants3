@@ -15,13 +15,9 @@ var SettingsView = Backbone.View.extend({
 
     var self = this;
 
-    $('html').on('click', function(e) {
+    $('html').on('click.settings', function(e) {
       if ($(e.target).attr('id') !== 'settings-menu' && $(e.target).parents('#settings-menu').length === 0) {
-        self.$el.transit({ opacity: 0 }, 200, function() {
-          $(this).hide();
-        });
-
-        $(this).unbind(e);
+        self._hideMenu();
       }
     })
   },
@@ -36,6 +32,7 @@ var SettingsView = Backbone.View.extend({
     var feedType = parseInt($('.feed-type:checked').val());
     localStorage.feedType = feedType;
     this.options.parentView.switchFeed(feedType);
+    this._hideMenu();
   },
 
   toggleFullScreen: function(e) {
@@ -48,6 +45,8 @@ var SettingsView = Backbone.View.extend({
     } else {
       $('#full-screen-option a').text('Enter full screen');
     }
+
+    this._hideMenu();
   },
 
   signOut: function(e) {
@@ -57,5 +56,12 @@ var SettingsView = Backbone.View.extend({
       localStorage.clear();
       window.location.href = '/';
     }
+  },
+
+  _hideMenu: function() {
+    this.$el.transit({ opacity: 0 }, 200, function() {
+      $(this).hide();
+      $('html').off('click.settings'); // unbind overlay click handler
+    });
   }
 });
