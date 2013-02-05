@@ -183,3 +183,15 @@ body {
   z-index: 1;
   @include opacity(.5);
 }
+
+html:-webkit-full-screen {
+    background-image: url(/images/purty_wood.png);
+}
+
+html:-moz-full-screen {
+    background-image: url(/images/purty_wood.png);
+}
+ 
+html:fullscreen {
+    background-image: url(/images/purty_wood.png);
+}

@@ -1,6 +1,10 @@
 var SettingsView = Backbone.View.extend({
   initialize: function() {
     $('[name=feed-type][value=' + localStorage.feedType + ']').prop('checked', true);
+
+    if (!screenfull.enabled) {
+      $('#full-screen-option').hide();
+    }
   },
 
   render: function(e) {
@@ -24,6 +28,7 @@ var SettingsView = Backbone.View.extend({
 
   events: {
     'change .feed-type': 'changeFeedType',
+    'click .full-screen': 'toggleFullScreen',
     'click .sign-out': 'signOut'
   },
 
@@ -31,6 +36,18 @@ var SettingsView = Backbone.View.extend({
     var feedType = parseInt($('.feed-type:checked').val());
     localStorage.feedType = feedType;
     this.options.parentView.switchFeed(feedType);
+  },
+
+  toggleFullScreen: function(e) {
+    e.preventDefault();
+
+    screenfull.toggle();
+
+    if (screenfull.isFullscreen) {
+      $('#full-screen-option a').text('Exit full screen');
+    } else {
+      $('#full-screen-option a').text('Enter full screen');
+    }
   },
 
   signOut: function(e) {
