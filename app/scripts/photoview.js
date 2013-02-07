@@ -13,46 +13,54 @@ var PhotoView = Backbone.View.extend({
     // randomize side to throw from
 
     var side = Math.floor(Math.random() * 4);
+    var currentX, currentY;
 
     switch (side) {
       case 0: // top
-        this.$el.css({ top: this.options.imageLength * -1, left: this._randomX() });
+        currentX = this._randomX();
+        currentY = this.options.imageLength * -1;
         break;
       case 1: // right
-        this.$el.css({ top: this._randomY(), left: window.innerWidth });
+        currentX = window.innerWidth;
+        currentY = this._randomY();
         break;
       case 2: // bottom
-        this.$el.css({ top: window.innerHeight, left: this._randomX() });
+        currentX = this._randomX();
+        currentY = window.innerHeight;
         break;
       case 3: // left
-        this.$el.css({ top: this._randomY(), left: this.options.imageLength * -1 });
+        currentX = this.options.imageLength * -1;
+        currentY = this._randomY();
         break;
     }
 
-    $('#board').append(this.$el);
+    this.$el.css({ top: currentY, left: currentX });
 
-    // randomize throw
-
+    // spin clockwise or counter-clockwise
     var spin = 1;
-    if (Math.round(Math.random()) == 0) {
+    if (Math.round(Math.random()) === 0) {
       spin = -1;
     }
 
-    var rotateOffset = Math.floor(Math.random() * 15);
+    // how many spins - half or one (spinCount = 0 means half)
     var spinCount = Math.floor(Math.random() * 2); // 0 or 1
 
-    var rotate = ((360 * spinCount) + rotateOffset) * spin;
-
-    if (spinCount == 0) {
+    if (spinCount === 0) {
       // if no spin, do half a spin
       this.$el.css({ rotate: 180 });
     }
 
-    var left = this._randomX();
-    var top = this._randomY();
+    // rotation random offset
+    var rotateOffset = Math.floor(Math.random() * 15);
+    var newRotate = ((360 * spinCount) + rotateOffset) * spin;
+
+    $('#board').append(this.$el);
+
+    var translateX = (this._randomX() - currentX);
+    var translateY = (this._randomY() - currentY);
 
     this.$el
-      .transition({ left: left, top: top, rotate: rotate, easing: 'snap', duration: 1500 })
+      .transition({ x: translateX, y: translateY, rotate: newRotate, easing: 'snap', duration: 1500 })
       .transition({ opacity: 0, delay: this.options.fadeDelayMS }, this.options.fadeOutMS, 'in', function() {
         this.remove();
       });
