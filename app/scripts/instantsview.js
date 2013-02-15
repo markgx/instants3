@@ -1,4 +1,6 @@
 var InstantsView = Backbone.View.extend({
+  loadIntervalID: null,
+
   initialize: function() {
     this.loggedIn = false;
 
@@ -16,6 +18,7 @@ var InstantsView = Backbone.View.extend({
     this.imageList = new ImageList();
     this.aboutView = new AboutView({ el: $('#about') });
     this.settingsView = new SettingsView({ el: $('#settings-menu'), parentView: this });
+    this.loadImagesFnQueue = [];
   },
 
   events: {
@@ -28,27 +31,21 @@ var InstantsView = Backbone.View.extend({
     if (this.loggedIn) {
       var self = this;
       var loadImageFn = null;
+      var callCount;
 
       if (parseInt(localStorage.feedType) === FEED_TYPES.FEED) {
         loadImageFn = this._loadFeedImages;
+        callCount = 3;
       } else {
         loadImageFn = this._loadPopularImages;
+        callCount = 5;
       }
 
-      $('#spinner').show();
+      for (var i = 0; i < callCount; i++) {
+        this.loadImagesFnQueue.push({ loadImageFn: loadImageFn, imageList: this.imageList });
+      }
 
-      loadImageFn.call(self, self.imageList).success(function() {
-        self.interval = setInterval(function() {
-          self._showImage();
-        }, options.intervalMS);
-
-        // call twice -- better way to do this?
-        self.pendingLoad = setTimeout(function() {
-          loadImageFn.call(self, self.imageList);
-        }, 20000);
-
-        $('#spinner').hide();
-      });
+      this._callLoadImageFn();
     } else {
       $('#welcome').show();
       $('#settings-icon').parent().hide(); // hide settings icon
@@ -71,7 +68,9 @@ var InstantsView = Backbone.View.extend({
   },
 
   switchFeed: function(feedType) {
-    clearInterval(this.interval);
+    this.loadImagesFnQueue = [];
+    clearInterval(this.loadIntervalID);
+    this.loadIntervalID = null;
 
     if (this.pendingLoad) {
       clearTimeout(this.pendingLoad);
@@ -96,6 +95,35 @@ var InstantsView = Backbone.View.extend({
 
     return this.instagram.getPopularFeed(function(result) {
       self._processFeedResults(result, imageList);
+    });
+  },
+
+  _callLoadImageFn: function() {
+    if (this.loadImagesFnQueue.length === 0) {
+      return;
+    }
+
+    var fnEl = this.loadImagesFnQueue.shift();
+    var loadImageFn = fnEl.loadImageFn;
+    var imageList = fnEl.imageList;
+    var self = this;
+
+    if (self.loadIntervalID == null) {
+      $('#spinner').show();
+    }
+
+    loadImageFn.call(this, imageList).success(function() {
+      if (self.loadIntervalID == null) {
+        self.loadIntervalID = setInterval(function() {
+          self._showImage();
+        }, self.options.intervalMS);
+      }
+
+      $('#spinner').hide();
+
+      self.pendingLoad = setTimeout(function() {
+        self._callLoadImageFn.call(self, self.imageList);
+      }, 20000);
     });
   },
 
