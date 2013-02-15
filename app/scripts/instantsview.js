@@ -27,23 +27,25 @@ var InstantsView = Backbone.View.extend({
   render: function() {
     if (this.loggedIn) {
       var self = this;
-      var loadFunction = null;
+      var loadImageFn = null;
 
       if (parseInt(localStorage.feedType) === FEED_TYPES.FEED) {
-        loadFunction = this._loadFeedImages;
+        loadImageFn = this._loadFeedImages;
       } else {
-        loadFunction = this._loadPopularImages;
+        loadImageFn = this._loadPopularImages;
       }
 
       $('#spinner').show();
 
-      loadFunction.call(self).success(function() {
+      loadImageFn.call(self, self.imageList).success(function() {
         self.interval = setInterval(function() {
           self._showImage();
         }, options.intervalMS);
 
         // call twice -- better way to do this?
-        self.pendingLoad = setTimeout(function() { loadFunction.call(self); }, 20000);
+        self.pendingLoad = setTimeout(function() {
+          loadImageFn.call(self, self.imageList);
+        }, 20000);
 
         $('#spinner').hide();
       });
@@ -80,24 +82,24 @@ var InstantsView = Backbone.View.extend({
     this.render();
   },
 
-  _loadFeedImages: function() {
+  _loadFeedImages: function(imageList) {
     var self = this;
 
     return this.instagram.getUserFeed(function(result) {
       self.nextMaxId = result.pagination.next_max_id; // if fetching more images, start from this id
-      self._processFeedResults(result);
+      self._processFeedResults(result, imageList);
     }, 30, null, self.nextMaxId);
   },
 
-  _loadPopularImages: function() {
+  _loadPopularImages: function(imageList) {
     var self = this;
 
     return this.instagram.getPopularFeed(function(result) {
-      self._processFeedResults(result);
+      self._processFeedResults(result, imageList);
     });
   },
 
-  _processFeedResults: function(result) {
+  _processFeedResults: function(result, imageList) {
     var self = this;
 
     var images = _.map(result.data, function(o) {
@@ -111,7 +113,7 @@ var InstantsView = Backbone.View.extend({
 
     // preload images
     _(images).each(function(el) {
-      self.imageList.add(el);
+      imageList.add(el);
       $('<img />').attr('src', el.url).appendTo('#preload').css('display','none');
     });
   },
