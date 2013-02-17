@@ -1,0 +1,225 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\000035}}
+body {
+  background-image: url(/images/purty_wood.png);
+  margin: 0;
+  overflow: hidden;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000311}}
+#header {
+  font-family: "Finger Paint", cursive;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
+  opacity: 0.65;
+  font-size: 1.6em;
+  position: fixed;
+  top: 16px;
+  left: 12px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000320}}
+.image {
+  position: absolute;
+  cursor: pointer;
+  height: 360px;
+  background-image: url(/images/handmadepaper.png);
+  border: 1px solid #dddddd;
+  border-radius: 2px;
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.2);
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000329}}
+.image img {
+  width: 275px;
+  height: 275px;
+  padding: 15px 15px 0px 15px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000335}}
+.image .username {
+  position: relative;
+  text-align: right;
+  padding-top: 20px;
+  padding-right: 18px;
+  font-family: "Finger Paint", cursive;
+  font-size: 1.05em;
+  color: #555;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000346}}
+.image:hover .username {
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000353}}
+#welcome {
+  width: 400px;
+  padding: 18px 18px 70px 18px;
+  background-image: url(/images/handmadepaper.png);
+  border: 1px solid #dddddd;
+  border-radius: 2px;
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.2);
+  margin: 40px auto 0;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000363}}
+#welcome .inset {
+  height: 345px;
+  background-color: #e4e4dd;
+  border: 1px #e2e2e2 solid;
+  padding: 12px;
+  line-height: 30px;
+  font-family: "Donegal One", serif;
+  font-size: 1.4em;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000374}}
+#actions {
+  font-family: "Finger Paint", cursive;
+  font-size: 1.8em;
+  position: fixed;
+  top: 8px;
+  right: 12px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000381}}
+#actions ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000386}}
+#actions ul li {
+  display: inline;
+  color: #fff;
+  text-decoration: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000391}}
+#actions ul li i {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
+  opacity: 0.65;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\0000394}}
+#actions ul li i:hover {
+  color: #4B4948;
+  -webkit-transition-property: color;
+  -moz-transition-property: color;
+  -o-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.1s;
+  -moz-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  cursor: pointer;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003105}}
+#about {
+  width: 500px;
+  padding: 30px;
+  background: url(/images/gplaypattern.png);
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  margin-left: -280px;
+  font-family: "Lato", sans-serif;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  z-index: 1000;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003118}}
+#about h2:first-child {
+  margin-top: 0;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003122}}
+#about h2, #about h3 {
+  font-family: "Finger Paint", cursive;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003126}}
+#about a {
+  color: #CC0A0A;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003129}}
+#about a:hover {
+  color: #F88366;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003135}}
+#settings-menu {
+  position: absolute;
+  width: 200px;
+  margin-left: -140px;
+  background: url(/images/gplaypattern.png);
+  padding: 10px;
+  border: 2px solid #666666;
+  border-radius: 5px;
+  color: #333;
+  font-family: "Lato", sans-serif;
+  font-size: .5em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003147}}
+#settings-menu:before {
+  position: absolute;
+  top: -7px;
+  right: 9px;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #666666;
+  border-left: 7px solid transparent;
+  content: '';
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003158}}
+#settings-menu h3:first-child {
+  font-family: "Finger Paint", cursive;
+  margin-top: 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003164}}
+#spinner {
+  display: none;
+  color: #000;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  opacity: 0.6;
+  position: fixed;
+  top: 50%;
+  left: 49%;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003173}}
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  z-index: 1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003185}}
+html:-webkit-full-screen {
+  background-image: url(/images/purty_wood.png);
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003189}}
+html:-moz-full-screen {
+  background-image: url(/images/purty_wood.png);
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mark\/Projects\/instants3\/app\/styles\/main\.scss}line{font-family:\00003193}}
+html:fullscreen {
+  background-image: url(/images/purty_wood.png);
+}
