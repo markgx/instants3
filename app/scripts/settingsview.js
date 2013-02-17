@@ -15,6 +15,8 @@ var SettingsView = Backbone.View.extend({
 
     var self = this;
 
+    this._setFullScreenOptionText();
+
     $('html').on('click.settings', function(e) {
       if ($(e.target).attr('id') !== 'settings-menu' && $(e.target).parents('#settings-menu').length === 0) {
         self._hideMenu();
@@ -39,14 +41,17 @@ var SettingsView = Backbone.View.extend({
     e.preventDefault();
 
     screenfull.toggle();
+    this._setFullScreenOptionText();
 
+    this._hideMenu();
+  },
+
+  _setFullScreenOptionText: function() {
     if (screenfull.isFullscreen) {
       $('#full-screen-option a').text('Exit full screen');
     } else {
       $('#full-screen-option a').text('Enter full screen');
     }
-
-    this._hideMenu();
   },
 
   signOut: function(e) {
