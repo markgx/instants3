@@ -10,6 +10,11 @@ var PhotoView = Backbone.View.extend({
     var image = this.model;
     this.$el.append('<img src="' + image.url + '" /><div class="username">' + image.username + '</div>')
 
+    // always show username is checked
+    if (localStorage.showUsernames == 'true') {
+      $('.username', this.$el).addClass('show');
+    }
+
     // randomize side to throw from
 
     var side = Math.floor(Math.random() * 4);

@@ -43,6 +43,10 @@ body {
     @include opacity(0);
   }
 
+  .show {
+    @include opacity(.7);
+  }
+
   &:hover .username {
     @include transition-property(opacity);
     @include transition-duration(.3s);

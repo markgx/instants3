@@ -2,6 +2,10 @@ var SettingsView = Backbone.View.extend({
   initialize: function() {
     $('[name=feed-type][value=' + localStorage.feedType + ']').prop('checked', true);
 
+    if (localStorage.showUsernames == 'true') {
+      $('[name=show-usernames]').prop('checked', true);
+    }
+
     if (!screenfull.enabled) {
       $('#full-screen-option').hide();
     }
@@ -26,6 +30,7 @@ var SettingsView = Backbone.View.extend({
 
   events: {
     'change .feed-type': 'changeFeedType',
+    'change .show-usernames': 'changeShowUsernames',
     'click .full-screen': 'toggleFullScreen',
     'click .sign-out': 'signOut'
   },
@@ -35,6 +40,17 @@ var SettingsView = Backbone.View.extend({
     localStorage.feedType = feedType;
     this.options.parentView.switchFeed(feedType);
     this._hideMenu();
+  },
+
+  changeShowUsernames: function(e) {
+    var isChecked = $('[name=show-usernames]').prop('checked');
+    localStorage.showUsernames = isChecked;
+
+    if (isChecked) {
+      $('.image .username').addClass('show');
+    } else {
+      $('.image .username').removeClass('show');
+    }
   },
 
   toggleFullScreen: function(e) {

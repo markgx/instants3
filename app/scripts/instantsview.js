@@ -15,6 +15,10 @@ var InstantsView = Backbone.View.extend({
       localStorage.feedType = FEED_TYPES.FEED;
     }
 
+    if (localStorage.showUsernames == null) {
+      localStorage.showUsernames = false;
+    }
+
     this.imageList = new ImageList();
     this.aboutView = new AboutView({ el: $('#about') });
     this.settingsView = new SettingsView({ el: $('#settings-menu'), parentView: this });
