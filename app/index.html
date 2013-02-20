@@ -8,38 +8,6 @@
   <link href='http://fonts.googleapis.com/css?family=Donegal+One' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Finger+Paint' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.9/jquery.transit.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
-
-  <!-- build:js scripts/scripts.js -->
-  <script src="components/screenfull/dist/screenfull.js"></script>
-  <script src="scripts/vendor/instalib.js"></script>
-  <script src="scripts/application.js"></script>
-  <script src="scripts/photoview.js"></script>
-  <script src="scripts/aboutview.js"></script>
-  <script src="scripts/settingsview.js"></script>
-  <script src="scripts/instantsview.js"></script>
-  <!-- endbuild -->
-
-  <script type="text/javascript">
-    window.options = {
-      imageLength: 275,
-      intervalMS: 2100,
-      fadeDelayMS: 15000,
-      fadeOutMS: 5000,
-      clientID: '1e4ea3f6ea2a49899f32429d9a53566b',
-      callbackURL: 'http://localhost:3501/settoken.html',
-      el: 'body'
-    };
-
-    $(document).ready(function() {
-      window.instantsView = new InstantsView(window.options);
-      instantsView.render();
-    });
-  </script>
 </head>
 <body>
   <div id="header">instants.nu</div>
@@ -114,6 +82,38 @@
     </ul>
   </div>
   <div id="overlay"></div>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.9/jquery.transit.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
+
+  <!-- build:js scripts/scripts.js -->
+  <script src="components/screenfull/dist/screenfull.js"></script>
+  <script src="scripts/vendor/instalib.js"></script>
+  <script src="scripts/application.js"></script>
+  <script src="scripts/photoview.js"></script>
+  <script src="scripts/aboutview.js"></script>
+  <script src="scripts/settingsview.js"></script>
+  <script src="scripts/instantsview.js"></script>
+  <!-- endbuild -->
+
+  <script type="text/javascript">
+    window.options = {
+      imageLength: 275,
+      intervalMS: 2100,
+      fadeDelayMS: 15000,
+      fadeOutMS: 5000,
+      clientID: '1e4ea3f6ea2a49899f32429d9a53566b',
+      callbackURL: 'http://localhost:3501/settoken.html',
+      el: 'body'
+    };
+
+    $(document).ready(function() {
+      window.instantsView = new InstantsView(window.options);
+      instantsView.render();
+    });
+  </script>
 
   <script type="text/javascript">
     var _gaq = _gaq || [];
