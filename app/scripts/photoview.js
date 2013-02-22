@@ -1,3 +1,8 @@
+var photoViewConstants = {
+  photoWidth: 305,
+  photoHeight: 360
+}
+
 var PhotoView = Backbone.View.extend({
   tagName: 'div',
   className: 'image',
@@ -23,7 +28,7 @@ var PhotoView = Backbone.View.extend({
     switch (side) {
       case 0: // top
         currentX = this._randomX();
-        currentY = this.options.imageLength * -1;
+        currentY = photoViewConstants.photoHeight * -1;
         break;
       case 1: // right
         currentX = window.innerWidth;
@@ -34,7 +39,7 @@ var PhotoView = Backbone.View.extend({
         currentY = window.innerHeight;
         break;
       case 3: // left
-        currentX = this.options.imageLength * -1;
+        currentX = photoViewConstants.photoWidth * -1;
         currentY = this._randomY();
         break;
     }
@@ -76,10 +81,10 @@ var PhotoView = Backbone.View.extend({
   },
 
   _randomX: function() {
-    return Math.floor(Math.random() * (window.innerWidth - options.imageLength - 15)); // padding
+    return Math.floor(Math.random() * (window.innerWidth - photoViewConstants.photoWidth));
   },
 
   _randomY: function() {
-    return Math.floor(Math.random() * (window.innerHeight - options.imageLength - 85)); // padding
+    return Math.floor(Math.random() * (window.innerHeight - photoViewConstants.photoHeight));
   }
 });
